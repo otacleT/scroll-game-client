@@ -1,6 +1,7 @@
 import { Modal } from "@mantine/core";
 import { FC, useCallback, useState } from "react";
 import useSWR from "swr";
+import { useMetamask } from "../../context/metamask";
 import { useColor } from "../../hook/Color";
 import { useOwnerOf } from "../../hook/OwnerOf";
 import { fetcher } from "../../utils/fetcher";
@@ -22,6 +23,7 @@ export const ColorModal: FC<Props> = (props) => {
   const { url } = useColor();
   const { owner } = useOwnerOf();
   const { data } = useSWR(url, fetcher);
+  const { hasMetamask } = useMetamask();
   const handleColor = useCallback(
     (rgb: string) => {
       sendMessage("Player", "ChangeColor", rgb);
@@ -71,8 +73,10 @@ export const ColorModal: FC<Props> = (props) => {
               </button>
             )}
           </li>
-        ) : (
+        ) : hasMetamask ? (
           <li>NFTを所持していません</li>
+        ) : (
+          <li>Metamaskがインストールされていません</li>
         )}
       </ul>
     </Modal>

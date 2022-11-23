@@ -1,10 +1,19 @@
 import { Group, Text } from "@mantine/core";
 import { Goerli, useEthers } from "@usedapp/core";
+import { useMetamask } from "../../context/metamask";
 
 export const WalletConnect = () => {
   const { account, chainId, deactivate, activateBrowserWallet, switchNetwork } =
     useEthers();
+  const { hasMetamask } = useMetamask();
 
+  if (!hasMetamask) {
+    return (
+      <Text className="text-sm" color="red">
+        Metamaskがインストールされていません
+      </Text>
+    );
+  }
   if (account) {
     if (chainId === Goerli.chainId) {
       return (
