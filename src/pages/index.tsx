@@ -1,3 +1,4 @@
+import { onAuthStateChanged, User } from "firebase/auth";
 import Head from "next/head";
 import { useCallback, useEffect, useState } from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
@@ -5,8 +6,19 @@ import { ColorModal } from "../component/ColorModal";
 import { Header } from "../component/Header";
 import { Loading } from "../component/Loading";
 import { ScoreModal } from "../component/ScoreModal";
+import { useStore } from "../Firebase";
+import { firebaseAuth } from "../Firebase/firebase";
 
 export default function Home() {
+  const [user, setUser] = useState<User | null>();
+
+  /* ↓ログインしているかどうかを判定する */
+  useEffect(() => {
+    onAuthStateChanged(firebaseAuth, (currentUser) => {
+      setUser(currentUser);
+    });
+  }, []);
+
   const [score, setScore] = useState<number>(0);
   const {
     unityProvider,
@@ -27,10 +39,13 @@ export default function Home() {
   const [colorOpen, setColorOpen] = useState<boolean>(false);
   const [scoreOpen, setScoreOpen] = useState<boolean>(false);
 
-  const handleGameOver = useCallback((score: number) => {
+  const { createScore } = useStore();
+
+  const handleGameOver = useCallback(async (score: number) => {
     setScore(score);
+    await createScore(user, score)
     setScoreOpen(true);
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -53,6 +68,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header setColorOpen={setColorOpen} />
+      <div>{user ? user.displayName : "null"}</div>
       <main className="w-full relative">
         {isLoaded === false && <Loading />}
         <Unity

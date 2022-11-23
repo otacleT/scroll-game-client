@@ -1,5 +1,9 @@
 import { Modal } from "@mantine/core";
-import { FC, useCallback } from "react";
+import { onAuthStateChanged, User } from "firebase/auth";
+import { DocumentData } from "firebase/firestore";
+import { FC, useCallback, useEffect, useState } from "react";
+import { useStore } from "../../Firebase"
+import { firebaseAuth } from "../../Firebase/firebase";
 
 type Props = {
   open: boolean;
@@ -15,6 +19,21 @@ type Props = {
 
 export const ScoreModal: FC<Props> = (props) => {
   const { open, setOpen, score, sendMessage, isLoaded } = props;
+
+  const [user, setUser] = useState<User | null>();
+
+  /* ↓ログインしているかどうかを判定する */
+  useEffect(() => {
+    onAuthStateChanged(firebaseAuth, (currentUser) => {
+      setUser(currentUser);
+    });
+  }, []);
+  const [ scoreRank, setScoreRank ] = useState<DocumentData[]>([]);
+  const { getRankingByUser } = useStore();
+  getRankingByUser(user).then((docs: DocumentData[]) => {
+    setScoreRank(docs);
+    return docs
+  })
 
   const handleRestart = useCallback(() => {
     sendMessage("ScrollController", "Restart");
@@ -32,6 +51,25 @@ export const ScoreModal: FC<Props> = (props) => {
         {score}
         <span className="text-base pl-2">points</span>
       </p>
+      <h4 className="text-lg font-bold mt-10 px-5">Log</h4>
+      <ul className="px-5">
+        <li>
+          <span className="text-lg">1. </span>
+          <span className="text-lg">{scoreRank[0]?.score}</span>
+        </li>
+        <li>
+          <span className="text-lg">2. </span>
+          <span className="text-lg">{scoreRank[1]?.score}</span>
+        </li>
+        <li>
+          <span className="text-lg">3. </span>
+          <span className="text-lg">{scoreRank[2]?.score}</span>
+        </li>
+        <li>
+          <span className="text-lg">4. </span>
+          <span className="text-lg">{scoreRank[3]?.score}</span>
+        </li>
+      </ul>
       <button
         className="text-sm leading-none cursor-pointer font-bold text-white bg-black py-4 px-5 mx-auto mt-10 rounded-md block w-full"
         onClick={handleRestart}
