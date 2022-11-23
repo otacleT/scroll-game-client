@@ -1,6 +1,7 @@
-import type { AppProps } from "next/app";
 import { MantineProvider } from "@mantine/core";
 import { DAppProvider, Goerli } from "@usedapp/core";
+import type { AppProps } from "next/app";
+import { MetamaskProvider } from "../context/metamask";
 import "../styles/globals.css";
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -13,9 +14,11 @@ export default function App({ Component, pageProps }: AppProps) {
   };
   return (
     <DAppProvider config={config}>
-      <MantineProvider>
-        <Component {...pageProps} />
-      </MantineProvider>
+      <MetamaskProvider>
+        <MantineProvider>
+          <Component {...pageProps} />
+        </MantineProvider>
+      </MetamaskProvider>
     </DAppProvider>
   );
 }
