@@ -11,7 +11,7 @@ export const Header: FC<Props> = (props) => {
     <header className="w-full shadow-sm shadow-black/30">
       <div className="max-w-6xl mx-auto h-[70px] px-5 flex justify-between items-center">
         <h1 className="text-transparent font-extrabold text-2xl bg-clip-text bg-gradient-to-r from-[#4158D0] via-[#C850C0] to-[#FFCC70]">
-          Many drops make a shower
+          Tiritsumo
         </h1>
         <div className="flex items-center">
           <WalletConnect />
