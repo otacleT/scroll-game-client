@@ -12,7 +12,7 @@ export const useColor = (): UseColorOutput => {
   const { account } = useEthers();
   const [url, setUrl] = useState("");
   useEffect(() => {
-    if (window) {
+    if (window.ethereum && window.ethereum.isMetaMask) {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       const signer = provider.getSigner();
       const contractAddress = "0x54B6C7e79a80a24423ddDb32E821Fa2E88EcEca4";
