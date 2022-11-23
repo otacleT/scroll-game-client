@@ -2,7 +2,11 @@
 
 ![game-top](https://user-images.githubusercontent.com/80461281/203475146-327cfea8-eef7-4d9e-9bed-f17b7438f8de.png)
 
-### アプリの概要
+This game was created at the Kyushu Institute of Technology's Global Hackathon. This game uses NFT, but can be played even if you do not have a wallet such as Metamask installed.
+
+### Selected Proverb
+
+<center>Many drops make a shower.</center>
 
 ### 工夫したポイント
 
