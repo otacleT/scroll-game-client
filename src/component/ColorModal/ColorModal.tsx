@@ -45,12 +45,12 @@ export const ColorModal: FC<Props> = (props) => {
       centered
       withCloseButton={false}
     >
-      <h3 className="text-xl font-bold">Colors you have</h3>
+      <h3 className="text-xl font-bold">Available Colors</h3>
       <ul className="pt-10">
         {owner ? (
           <li className="flex justify-between">
             <span
-              className="block py-2 px-4 rounded-full text-center w-[70%]"
+              className="text-sm font-bold block px-4 rounded-full leading-[46px] text-center w-[70%] h-[46px]"
               style={{ backgroundColor: data?.name }}
             >
               {data?.name}
