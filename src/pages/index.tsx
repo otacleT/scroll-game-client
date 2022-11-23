@@ -71,7 +71,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header setColorOpen={setColorOpen} />
-      <div>{user ? user.displayName : "null"}</div>
       <main className="w-full relative">
         {isLoaded === false && <Loading />}
         <Unity
