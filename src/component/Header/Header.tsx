@@ -1,6 +1,4 @@
-import { onAuthStateChanged, User } from "firebase/auth";
-import { FC, useEffect, useState } from "react";
-import { firebaseAuth } from "../../Firebase/firebase";
+import { FC } from "react";
 import { WalletConnect } from "../WalletConnect";
 
 type Props = {
