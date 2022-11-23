@@ -27,7 +27,7 @@ export const ScoreModal: FC<Props> = (props) => {
       centered
       withCloseButton={false}
     >
-      <h3 className="text-xl font-bold">You got</h3>
+      <h3 className="text-xl font-bold">Your score</h3>
       <p className="text-5xl font-bold text-center pt-10">
         {score}
         <span className="text-base pl-2">points</span>
