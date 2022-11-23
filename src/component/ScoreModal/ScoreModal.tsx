@@ -32,27 +32,8 @@ export const ScoreModal: FC<Props> = (props) => {
         {score}
         <span className="text-base pl-2">points</span>
       </p>
-      <h4 className="text-lg font-bold mt-10 px-5">Log</h4>
-      <ul className="px-5">
-        <li>
-          <span className="text-lg">1. </span>
-          <span className="text-lg">10,000</span>
-        </li>
-        <li>
-          <span className="text-lg">2. </span>
-          <span className="text-lg">10,000</span>
-        </li>
-        <li>
-          <span className="text-lg">3. </span>
-          <span className="text-lg">10,000</span>
-        </li>
-        <li>
-          <span className="text-lg">4. </span>
-          <span className="text-lg">10,000</span>
-        </li>
-      </ul>
       <button
-        className="text-sm leading-none cursor-pointer font-bold text-white bg-black py-4 px-5 mx-auto mt-8 rounded-md block w-full"
+        className="text-sm leading-none cursor-pointer font-bold text-white bg-black py-4 px-5 mx-auto mt-10 rounded-md block w-full"
         onClick={handleRestart}
       >
         Play again
